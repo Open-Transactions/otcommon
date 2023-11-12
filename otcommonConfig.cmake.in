@@ -1,0 +1,19 @@
+# Copyright (c) 2020-2023 The Open-Transactions developers
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+@PACKAGE_INIT_STRING@
+
+list(APPEND
+  CMAKE_MODULE_PATH
+  "${CMAKE_CURRENT_LIST_DIR}"
+  "${CMAKE_CURRENT_LIST_DIR}/find-modules"
+  "${CMAKE_CURRENT_LIST_DIR}/modules"
+  "@MODULES_DIR_STRING@"
+)
+
+set(OTCOMMON_FORMAT_DIR "${CMAKE_CURRENT_LIST_DIR}/format")
+set(OTCOMMON_TEMPLATE_DIR "${CMAKE_CURRENT_LIST_DIR}/templates")
+
+include(otcommon-modules)
