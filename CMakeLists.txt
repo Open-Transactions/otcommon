@@ -55,7 +55,8 @@ configure_package_config_file(
 write_basic_package_version_file(
   "${CMAKE_BINARY_DIR}/${OTCOMMON_MODULES_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
   VERSION ${${PROJECT_NAME}_VERSION_STRING}
-  COMPATIBILITY AnyNewerVersion
+  COMPATIBILITY SameMajorVersion
+  ARCH_INDEPENDENT
 )
 
 install(
