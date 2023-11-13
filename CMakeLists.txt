@@ -14,6 +14,11 @@ option(
   "Packing option to control whether or not license file is installed"
   ON
 )
+option(
+  OTCOMMON_INSTALL_FORMAT
+  "Packing option to control whether or not formatting files are installed"
+  ON
+)
 
 otcommon_version_from_git()
 
@@ -79,14 +84,6 @@ install(
 
 install(
   FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/format/clang-format"
-    "${CMAKE_CURRENT_SOURCE_DIR}/format/cmake-format.py"
-  DESTINATION "${OTCOMMON_CMAKE_INSTALL_PATH}/format"
-  COMPONENT ${PROJECT_NAME}_format
-)
-
-install(
-  FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-apply-defines.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-define-job-pools.cmake"
@@ -119,3 +116,13 @@ install(
   DESTINATION "${OTCOMMON_CMAKE_INSTALL_PATH}/templates"
   COMPONENT ${PROJECT_NAME}_templates
 )
+
+if(OTCOMMON_INSTALL_FORMAT)
+  install(
+    FILES
+      "${CMAKE_CURRENT_SOURCE_DIR}/format/clang-format"
+      "${CMAKE_CURRENT_SOURCE_DIR}/format/cmake-format.py"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/format"
+    COMPONENT ${PROJECT_NAME}_format
+  )
+endif()
