@@ -20,7 +20,7 @@ option(
   ON
 )
 
-otcommon_version_from_git()
+otcommon_set_version_from_git()
 
 set(OTCOMMON_MODULES_DIR "cmake")
 
@@ -103,8 +103,8 @@ install(
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-osx-deployment-target.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-project-language-standard.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-rpath.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-version-from-git.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-update-submodules.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-version-from-git.cmake"
   DESTINATION "${OTCOMMON_CMAKE_INSTALL_PATH}/modules"
   COMPONENT ${PROJECT_NAME}_modules
 )

@@ -3,7 +3,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-macro(otcommon_version_from_git)
+macro(otcommon_set_version_from_git)
   if(NOT
      DEFINED
      ${PROJECT_NAME}_GIT_VERSION
@@ -18,8 +18,16 @@ macro(otcommon_version_from_git)
       message(FATAL_ERROR "git not found.")
     endif()
 
+    if(NOT
+       DEFINED
+       ${PROJECT_NAME}_GIT_DIR
+    )
+      set(${PROJECT_NAME}_GIT_DIR ".git")
+    endif()
+
     execute_process(
-      COMMAND ${GIT} "describe"
+      COMMAND ${GIT} "--git-dir=${${PROJECT_NAME}_GIT_DIR}" "describe" "--tags"
+              "--long"
       OUTPUT_VARIABLE ${PROJECT_NAME}_GIT_VERSION
       WORKING_DIRECTORY ${${PROJECT_NAME}_SOURCE_DIR}
       OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -61,11 +69,12 @@ macro(otcommon_version_from_git)
   string(
     REGEX
     REPLACE
-      "^${${PROJECT_NAME}_VERSION_MAJOR}\\.${${PROJECT_NAME}_VERSION_MINOR}\\.${${PROJECT_NAME}_VERSION_PATCH}-${${PROJECT_NAME}_VERSION_NEW_COMMITS}-(.*)"
+      "^${${PROJECT_NAME}_VERSION_MAJOR}\\.${${PROJECT_NAME}_VERSION_MINOR}\\.${${PROJECT_NAME}_VERSION_PATCH}-${${PROJECT_NAME}_VERSION_NEW_COMMITS}-g(.*)"
       "\\1"
       ${PROJECT_NAME}_VERSION_SHA1
       "${${PROJECT_NAME}_GIT_VERSION}"
   )
+
   if("${${PROJECT_NAME}_VERSION_NEW_COMMITS}"
      STREQUAL
      "${${PROJECT_NAME}_GIT_VERSION}"
@@ -80,10 +89,36 @@ macro(otcommon_version_from_git)
         "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}-${${PROJECT_NAME}_VERSION_NEW_COMMITS}-${${PROJECT_NAME}_VERSION_SHA1}"
     )
   endif()
+
   if("${${PROJECT_NAME}_VERSION_STRING}"
      STREQUAL
      ".."
   )
     message(FATAL_ERROR "Version string missing.")
   endif()
+
+  message(
+    STATUS
+      "Parsed ${PROJECT_NAME} version string \"${${PROJECT_NAME}_GIT_VERSION}\" as:"
+  )
+  message(
+    STATUS
+      " * ${PROJECT_NAME}_VERSION_MAJOR = \"${${PROJECT_NAME}_VERSION_MAJOR}\""
+  )
+  message(
+    STATUS
+      " * ${PROJECT_NAME}_VERSION_MINOR = \"${${PROJECT_NAME}_VERSION_MINOR}\""
+  )
+  message(
+    STATUS
+      " * ${PROJECT_NAME}_VERSION_PATCH = \"${${PROJECT_NAME}_VERSION_PATCH}\""
+  )
+  message(
+    STATUS
+      " * ${PROJECT_NAME}_VERSION_NEW_COMMITS = \"${${PROJECT_NAME}_VERSION_NEW_COMMITS}\""
+  )
+  message(
+    STATUS
+      " * ${PROJECT_NAME}_VERSION_SHA1 = \"${${PROJECT_NAME}_VERSION_SHA1}\"\n"
+  )
 endmacro()
