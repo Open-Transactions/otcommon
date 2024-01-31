@@ -86,6 +86,9 @@ install(
   FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-apply-defines.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-c.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-cxx.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-external.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-define-job-pools.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-define-signed-overflow.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-detect-msvc-standard-library-from-vcpkg-triplet.cmake"
