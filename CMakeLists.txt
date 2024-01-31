@@ -89,7 +89,6 @@ install(
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-define-job-pools.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-define-signed-overflow.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-detect-msvc-standard-library-from-vcpkg-triplet.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-file-to-hex.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-find-system-libraries.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-generate-cmake-files.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-hide-symbols.cmake"
