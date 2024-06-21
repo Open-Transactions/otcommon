@@ -7,14 +7,13 @@ function(otcommon_configure_target_cxx target_name)
   include(otcommon-configure-target-c)
   otcommon_configure_target_c(${target_name})
 
-  if(NOT MSVC)
+  if(OTCOMMON_COMPILER_IS_GCC OR OTCOMMON_COMPILER_IS_CLANG)
     target_compile_options(${target_name} PRIVATE "-fno-char8_t")
+  elseif(OTCOMMON_COMPILER_IS_CLANG_CL)
+    target_compile_options(${target_name} PRIVATE "/clang:-fno-char8_t")
   endif()
 
-  if(${CMAKE_CXX_COMPILER_ID}
-     MATCHES
-     GNU
-  )
+  if(OTCOMMON_COMPILER_IS_GCC)
     target_compile_options(
       ${target_name}
       PRIVATE

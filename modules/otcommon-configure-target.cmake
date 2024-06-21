@@ -5,13 +5,10 @@
 
 function(otcommon_configure_target target_name)
   include(otcommon-apply-defines)
+  include(otcommon-detect-compiler)
   otcommon_apply_defines(${target_name})
 
-  set_target_properties(
-    ${target_name}
-    PROPERTIES
-      POSITION_INDEPENDENT_CODE ON
-  )
+  set_target_properties(${target_name} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
   if(MSVC)
     set_target_properties(

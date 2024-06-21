@@ -16,7 +16,7 @@ function(otcommon_configure_target_c target_name)
       CXX_STANDARD_REQUIRED ON
   )
 
-  if(MSVC)
+  if(OTCOMMON_COMPILER_IS_MSVC)
     target_compile_options(
       ${target_name}
       PUBLIC "/EHsc"
@@ -32,7 +32,7 @@ function(otcommon_configure_target_c target_name)
     if(${PROJECT_NAME}_PEDANTIC_COMPILER_FLAGS)
       target_compile_options(${target_name} PRIVATE "/WX")
     endif()
-  else()
+  elseif(OTCOMMON_COMPILER_IS_GCC OR OTCOMMON_COMPILER_IS_CLANG)
     target_compile_options(
       ${target_name}
       PRIVATE
@@ -49,12 +49,26 @@ function(otcommon_configure_target_c target_name)
         ${target_name} PRIVATE "-Werror" "-pedantic-errors"
       )
     endif()
+  elseif(OTCOMMON_COMPILER_IS_CLANG_CL)
+    target_compile_options(
+      ${target_name}
+      PRIVATE
+        "/clang:-W"
+        "/clang:-Wall"
+        "/clang:-Wextra"
+        "/clang:-Wno-pragmas"
+        "/clang:-Wno-unknown-pragmas"
+        "/clang:-pedantic"
+    )
+
+    if(${PROJECT_NAME}_PEDANTIC_COMPILER_FLAGS)
+      target_compile_options(
+        ${target_name} PRIVATE "/clang:-Werror" "/clang:-pedantic-errors"
+      )
+    endif()
   endif()
 
-  if(${CMAKE_CXX_COMPILER_ID}
-     MATCHES
-     GNU
-  )
+  if(OTCOMMON_COMPILER_IS_GCC)
     target_compile_options(
       ${target_name}
       PRIVATE
@@ -75,12 +89,7 @@ function(otcommon_configure_target_c target_name)
         "-Wundef"
         "-Wunused-macros"
     )
-  endif()
-
-  if(${CMAKE_CXX_COMPILER_ID}
-     MATCHES
-     Clang
-  )
+  elseif(OTCOMMON_COMPILER_IS_CLANG)
     target_compile_options(
       ${target_name}
       PRIVATE
@@ -98,6 +107,25 @@ function(otcommon_configure_target_c target_name)
         "-Wno-unknown-warning-option"
         "-Wno-weak-template-vtables"
         "-Wno-weak-vtables"
+    )
+  elseif(OTCOMMON_COMPILER_IS_CLANG_CL)
+    target_compile_options(
+      ${target_name}
+      PRIVATE
+        "/clang:-Weverything"
+        "/clang:-Wno-c++98-compat"
+        "/clang:-Wno-c++98-compat-pedantic"
+        "/clang:-Wno-covered-switch-default"
+        "/clang:-Wno-exit-time-destructors"
+        "/clang:-Wno-global-constructors"
+        "/clang:-Wno-inline-namespace-reopened-noninline"
+        "/clang:-Wno-missing-prototypes"
+        "/clang:-Wno-missing-variable-declarations"
+        "/clang:-Wno-padded"
+        "/clang:-Wno-undefined-func-template"
+        "/clang:-Wno-unknown-warning-option"
+        "/clang:-Wno-weak-template-vtables"
+        "/clang:-Wno-weak-vtables"
     )
   endif()
 endfunction()
