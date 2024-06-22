@@ -16,15 +16,22 @@ function(otcommon_configure_target_c target_name)
       CXX_STANDARD_REQUIRED ON
   )
 
-  if(OTCOMMON_COMPILER_IS_MSVC)
+  if(MSVC)
     target_compile_options(
       ${target_name}
       PUBLIC "/EHsc"
       PRIVATE
-        "/W3"
         "/Zc:char8_t-"
         "/bigobj"
         "/utf-8"
+    )
+  endif()
+
+  if(OTCOMMON_COMPILER_IS_MSVC)
+    target_compile_options(
+      ${target_name}
+      PRIVATE
+        "/W3"
         "/wd4068"
         "/wd4250"
     )
