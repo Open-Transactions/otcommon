@@ -4,9 +4,12 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 function(otcommon_detect_compiler)
-  if(${CMAKE_CXX_COMPILER_ID}
+  if(CMAKE_CXX_COMPILER_ID
      MATCHES
      Clang
+     OR CMAKE_CXX_COMPILER_ID
+        MATCHES
+        AppleClang
   )
     set(COMPILER_IS_CLANG ON)
   else()
