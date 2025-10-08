@@ -6,10 +6,17 @@
 function(otcommon_detect_compiler)
   if(CMAKE_CXX_COMPILER_ID
      MATCHES
+     AppleClang
+  )
+    set(OTCOMMON_COMPILER_IS_APPLE_CLANG ON)
+  else()
+    set(OTCOMMON_COMPILER_IS_APPLE_CLANG OFF)
+  endif()
+
+  if(CMAKE_CXX_COMPILER_ID
+     MATCHES
      Clang
-     OR CMAKE_CXX_COMPILER_ID
-        MATCHES
-        AppleClang
+     OR OTCOMMON_COMPILER_IS_APPLE_CLANG
   )
     set(COMPILER_IS_CLANG ON)
   else()

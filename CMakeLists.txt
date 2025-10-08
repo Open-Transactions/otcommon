@@ -107,6 +107,7 @@ install(
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-project-language-standard.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-rpath.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-set-version-from-git.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-target-embed-directory.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-update-submodules.cmake"
   DESTINATION "${OTCOMMON_CMAKE_INSTALL_PATH}/modules"
   COMPONENT ${PROJECT_NAME}_modules
