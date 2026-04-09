@@ -85,6 +85,7 @@ install(
 install(
   FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-apply-defines.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-checkout-submodule.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-c.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-cxx.cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/modules/otcommon-configure-target-external.cmake"
