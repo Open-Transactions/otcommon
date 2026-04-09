@@ -5,6 +5,7 @@
 
 include(GNUInstallDirs)
 include(otcommon-apply-defines)
+include(otcommon-bootstrap-vcpkg)
 include(otcommon-checkout-submodule)
 include(otcommon-configure-target)
 include(otcommon-configure-target-c)
