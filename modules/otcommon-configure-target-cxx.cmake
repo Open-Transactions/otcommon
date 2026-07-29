@@ -24,6 +24,11 @@ function(otcommon_configure_target_cxx target_name)
         "-Woverloaded-virtual"
         "-Wstrict-null-sentinel"
         "-Wsuggest-override"
+        "-Wno-non-virtual-dtor"
     )
+    # ~~~
+    # NOTE -Wnon-virtual-dtor is superseded by -Wdelete-non-virtual-dtor (included in -Wall)
+    # https://patchwork.sourceware.org/project/gcc/patch/20221123101038.2192550-1-jwakely@redhat.com/
+    # ~~~
   endif()
 endfunction()
